@@ -1,0 +1,31 @@
+model_params:
+  name: 'MSEVAE'
+  in_channels: 3
+  latent_dim: 128
+
+trainer_params:
+  accelerator: 'gpu'
+  devices: [0, 1]
+  max_epochs: 50
+
+logging_params:
+  save_dir: "/kaggle/working/logs/"
+  name: "MSEVAE"
+
+data_params:
+  data_path: "/kaggle/input/celeba-mine/"
+  train_batch_size: 64
+  val_batch_size: 64
+  test_batch_size: 144
+  patch_size: 64 
+  center_crop: 148
+
+exp_params:
+  LR: 0.005
+  lambda_l2: 0.0 
+  scheduler_gamma: 0.95 
+  beta_1: 0.9
+  beta_2: 0.999
+  kld_weight_train: 0.00039 # common practice: M / N, where
+                            # M=batch_size, N=number_of_samples
+  kld_weight_val: 0.0032
